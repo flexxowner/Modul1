@@ -105,7 +105,7 @@ namespace Modul1_HomeWork4
             }
             Console.WriteLine("Even array with upper chars:");
             Console.WriteLine(stringEvenArray);
-
+            Console.WriteLine("--------------------------------------------------------------");
             if (stringOddArray.Contains('a') || stringOddArray.Contains('e') ||
     stringOddArray.Contains('i') || stringOddArray.Contains('d') || stringOddArray.Contains('h') || stringOddArray.Contains('j'))
             {
@@ -118,7 +118,7 @@ namespace Modul1_HomeWork4
             }
             Console.WriteLine("Odd array with upper chars:");
             Console.WriteLine(stringOddArray);
-
+            Console.WriteLine("--------------------------------------------------------------");
             int upcount1 = 0;
             int upcount2 = 0;
             for (int i = 0; i < stringEvenArray.Length; i++)
@@ -147,7 +147,7 @@ namespace Modul1_HomeWork4
                 Console.WriteLine("Second array has more uppercase letters:");
                 Console.WriteLine($"Number of uppercase letters for the second array: {upcount2}");
             }
-
+            Console.WriteLine("--------------------------------------------------------------");
         }
     }
 }
