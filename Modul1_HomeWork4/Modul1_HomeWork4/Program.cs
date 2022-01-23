@@ -4,35 +4,59 @@ namespace Modul1_HomeWork4
 {
     class Program
     {
+        private static void GetArray(ref int[] mainArray)
+        {
+            Random random = new Random();
+            for (int i = 0; i < mainArray.Length; i++)
+            {
+                mainArray[i] = random.Next(1, 26);
+            }
+
+            return;
+        }
+
         static void Main(string[] args)
         {
-            int lengh1;
             int k = 0, l = 0;
-            Random random = new Random();
             Console.WriteLine("Input array lenght:");
-            lengh1 = Convert.ToInt32(Console.ReadLine());
-            if (lengh1 == 0)
+            int lengh = Convert.ToInt32(Console.ReadLine());
+            if (lengh == 0)
             {
                 Console.WriteLine("Error, invalid array lenght");
                 Console.WriteLine("Try again:");
-                lengh1 = Convert.ToInt32(Console.ReadLine());
+                lengh = Convert.ToInt32(Console.ReadLine());
             }
-            int[] mainArray = new int[lengh1];
-            dynamic[] evenArray = new dynamic[lengh1];
-            dynamic[] oddArray = new dynamic[lengh1];
+
+            int[] mainArray = new int[lengh];
             string letters = "0abcdefghijklmnopqrstuvwxyz";
 
             Console.WriteLine("--------------------------------------------------------------");
             Console.WriteLine("First array:");
 
-            for (int i = 0; i < mainArray.Length; i++)
-            {
-                mainArray[i] = random.Next(1, 26);
-            }
+            GetArray(ref mainArray);
             var array = string.Join(" ", mainArray);
             Console.WriteLine(array);
             Console.WriteLine("--------------------------------------------------------------");
+
             // Переписываем из главного массива четные значения в первым массив, нечетные - во второй. Пустые места заполняем 0
+            int count1 = 0;
+            int count2 = 0;
+
+            for (int i = 0; i < mainArray.Length; i++)
+            {
+                if (mainArray[i] % 2 == 0)
+                {
+                    count1++;
+                }
+                else
+                {
+                    count2++;
+                }
+            }
+
+            dynamic[] evenArray = new dynamic[count1];
+            dynamic[] oddArray = new dynamic[count2];
+
             for (int i = 0; i < mainArray.Length; i++)
             {
                 if (mainArray[i] % 2 == 0)
@@ -44,14 +68,7 @@ namespace Modul1_HomeWork4
                     oddArray[l++] = mainArray[i];
                 }
             }
-            while (k < mainArray.Length)
-            {
-                evenArray[k++] = 0;
-            }
-            while (l < mainArray.Length)
-            {
-                oddArray[l++] = 0;
-            }
+
             var stringEvenArray = string.Join(" ", evenArray);
             var stringOddArray = string.Join(" ", oddArray);
             Console.WriteLine("Even array:");
@@ -61,10 +78,8 @@ namespace Modul1_HomeWork4
             Console.WriteLine(stringOddArray);
             Console.WriteLine("--------------------------------------------------------------");
 
-
             for (int i = 0; i < evenArray.Length; i++)
             {
-
                 for (int j = 0; j < letters.Length; j++)
                 {
                     if (evenArray[i] == j)
@@ -80,7 +95,6 @@ namespace Modul1_HomeWork4
             Console.WriteLine("--------------------------------------------------------------");
             for (int i = 0; i < oddArray.Length; i++)
             {
-
                 for (int j = 0; j < letters.Length; j++)
                 {
                     if (oddArray[i] == j)
@@ -89,11 +103,12 @@ namespace Modul1_HomeWork4
                     }
                 }
             }
+
             stringOddArray = string.Join(" ", oddArray);
             Console.WriteLine("Odd array with letters:");
             Console.WriteLine(stringOddArray);
             Console.WriteLine("--------------------------------------------------------------");
-            if (stringEvenArray.Contains('a') || stringEvenArray.Contains('e') || 
+            if (stringEvenArray.Contains('a') || stringEvenArray.Contains('e') ||
                 stringEvenArray.Contains('i') || stringEvenArray.Contains('d') || stringEvenArray.Contains('h') || stringEvenArray.Contains('j'))
             {
                 stringEvenArray = stringEvenArray.Replace('a', 'A');
@@ -103,6 +118,7 @@ namespace Modul1_HomeWork4
                 stringEvenArray = stringEvenArray.Replace('h', 'H');
                 stringEvenArray = stringEvenArray.Replace('j', 'J');
             }
+
             Console.WriteLine("Even array with upper chars:");
             Console.WriteLine(stringEvenArray);
             Console.WriteLine("--------------------------------------------------------------");
@@ -116,6 +132,7 @@ namespace Modul1_HomeWork4
                 stringOddArray = stringOddArray.Replace('h', 'H');
                 stringOddArray = stringOddArray.Replace('j', 'J');
             }
+
             Console.WriteLine("Odd array with upper chars:");
             Console.WriteLine(stringOddArray);
             Console.WriteLine("--------------------------------------------------------------");
@@ -142,11 +159,16 @@ namespace Modul1_HomeWork4
                 Console.WriteLine("First array has more uppercase letters:");
                 Console.WriteLine($"Number of uppercase letters for the first array: {upcount1}");
             }
-            else
+            else if (upcount1 < upcount2)
             {
                 Console.WriteLine("Second array has more uppercase letters:");
                 Console.WriteLine($"Number of uppercase letters for the second array: {upcount2}");
             }
+           else if (upcount1 == upcount2)
+            {
+                Console.WriteLine("The first array is equal to the second");
+            }
+
             Console.WriteLine("--------------------------------------------------------------");
         }
     }
